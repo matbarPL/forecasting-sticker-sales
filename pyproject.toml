@@ -1,0 +1,88 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "forecasting-sticker-sales"
+version = "0.1.0"
+description = ""
+authors = ["matbarPL <mateusz.baryla.1996@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+kedro = {version = ">=0.19.10,<0.20.0", extras = ["jupyter"]}
+ipython = ">=8.10"
+jupyterlab = ">=3.0"
+kedro-viz = ">=6.7.0"
+notebook = "^7.3.2"
+scikit-learn = ">=1.5.1,<1.6.0"
+seaborn = ">=0.12.1,<0.13.0"
+pyspark = "^3.5.4"
+kedro-datasets = {extras = ["matplotlib-matplotlibwriter"], version = "^6.0.0"}
+hdfs = "^2.7.3"
+s3fs = "^2024.12.0"
+openpyxl = "^3.1.5"
+fastparquet = "^2024.11.0"
+
+[too.poetry.scripts]
+"forecasting-sticker-sales" = "forecasting_sticker_sales.__main__:main"
+
+[tool.poetry.plugins."kedro.hooks"]
+
+[project.optional-dependencies]
+docs = [
+    "docutils<0.21",
+    "sphinx>=5.3,<7.3",
+    "sphinx_rtd_theme==2.0.0",
+    "nbsphinx==0.8.1",
+    "sphinx-autodoc-typehints==1.20.2",
+    "sphinx_copybutton==0.5.2",
+    "ipykernel>=5.3, <7.0",
+    "Jinja2<3.2.0",
+    "myst-parser>=1.0,<2.1"
+]
+dev = [
+    "pytest-cov~=3.0",
+    "pytest-mock>=1.7.1, <2.0",
+    "pytest~=7.2",
+    "ruff~=0.1.8"
+]
+
+[tool.kedro]
+package_name = "forecasting_sticker_sales"
+project_name = "forecasting-sticker-sales"
+kedro_init_version = "0.19.10"
+tools = "['Linting', 'Testing', 'Custom Logging', 'Documentation', 'Data Structure', 'PySpark', 'Kedro Viz']"
+example_pipeline = "True"
+source_dir = "src"
+
+[tool.pytest.ini_options]
+addopts = """
+--cov-report term-missing \
+--cov src/forecasting_sticker_sales -ra"""
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff]
+line-length = 88
+show-fixes = true
+select = [
+    "F",   # Pyflakes
+    "W",   # pycodestyle
+    "E",   # pycodestyle
+    "I",   # isort
+    "UP",  # pyupgrade
+    "PL",  # Pylint
+    "T201", # Print Statement
+]
+ignore = ["E501"]  # Ruff format takes care of line-too-long
+
+[tool.kedro_telemetry]
+project_id = "4ee9d5f5a68549f4b41a884a22889688"
