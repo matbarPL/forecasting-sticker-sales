@@ -25,6 +25,8 @@ s3fs = "^2024.12.0"
 openpyxl = "^3.1.5"
 fastparquet = "^2024.11.0"
 pre-commit = "^4.1.0"
+optuna = "^4.2.0"
+lightgbm = "^4.5.0"
 
 [too.poetry.scripts]
 "forecasting-sticker-sales" = "forecasting_sticker_sales.__main__:main"
